@@ -10,5 +10,6 @@ module FreezerBurn
     require "ext/time"
     require "freezer_burn/main"
     require "freezer_burn/version"
+    require "freezer_burn/rotation"
 
 end
