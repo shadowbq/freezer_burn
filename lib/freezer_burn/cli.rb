@@ -1,6 +1,6 @@
+require 'rubygems'
 require "docopt"
 require 'freezer_burn'
-
 
 module FreezerBurn
 
@@ -15,7 +15,7 @@ module FreezerBurn
 doc = <<DOCOPT
 Example of program with many options using docopt.
 Usage:
-  ./bin/freezer_selector [-v] [--run]
+  ./bin/freezer_selector [-vd] [--run]
   ./bin/freezer_selector -h | --help
   ./bin/freezer_selector --version
 
@@ -23,6 +23,7 @@ Options:
   --run                explicitly run the freezer_selector
   -h --help            show this help message and exit
   --version            show version and exit
+  -d --dry-run         simulate without moving files
   -v --verbose         print status messages
 DOCOPT
 
@@ -45,24 +46,15 @@ DOCOPT
                 FreezerBurn::Settings.verbose = false
             end
 
-            if options['--run']
-                puts "do it"
-                puts "do it verbose" if FreezerBurn::Settings.verbose
-            end    
+            if options['--dry-run']
+                FreezerBurn::Settings.dryrun = true
+            end
+
+            FreezerBurn::Rotation.rotate(FreezerBurn::Settings.fridge}
+
+
 
         end # def
 
     end # class
 end # module
-
-=begin
-begin
-      finder = Barnyard2::Waldo::Where.new(options[:bookmark])
-      finder.utc = options[:utc]
-      puts finder
-  rescue Barnyard2::Waldo::WaldoFilePermissionsError
-      abort "Waldo File Read Perrmission Error, check permissions on the bookmark file."
-  rescue Barnyard2::Waldo::WaldoFileError
-      abort "Waldo File Error, file may not exist."
-  end
-=end
