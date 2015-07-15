@@ -2,17 +2,53 @@ module FreezerBurn
 
     class CustomError < StandardError; end
 
-    module Defaults
-      Raw = false # FreezerBurn::Defaults::Raw
-      VERBOSE = false
-      Fridge = '/var/db/yard/stats.*'
-      Freezer = '/var/log/freezer'
-      Gnu_tar_command ='gtar' # gtar on freebsd / tar on everything else
-      Remove_files = '--remove-files '
-      Prefix = 'cxtracker'
-      Max_scan_time_in_sec = 31536000 # One Year
+    module Settings
+        extend self
+
+        # Appdata provides a basic single-method DSL with .parameter method
+        # being used to define a set of available settings.
+        # This method takes one or more symbols, with each one being
+        # a name of the configuration option.
+        def parameter(*names)
+          names.each do |name|
+            attr_accessor name
+
+            # For each given symbol we generate accessor method that sets option's
+            # value being called with an argument, or returns option's current value
+            # when called without arguments
+            define_method name do |*values|
+              value = values.first
+              value ? self.send("#{name}=", value) : instance_variable_get("@#{name}")
+            end
+          end
+        end
+
+        # And we define a wrapper for the configuration block, that we'll use to set up
+        # our set of options
+        def config(&block)
+          instance_eval &block
+        end
+
     end
 
+    Settings.config do
+        parameter :verbose
+        parameter :fridge, :freezer
+        parameter :gnu_tar_command
+        parameter :remove_files
+        parameter :prefix
+        parameter :max_scan_time_in_sec
 
+    end
+
+    Settings.config do
+        verbose             false
+        fridge              '/var/db/yard/stats.*'
+        freezer             '/var/log/freezer'
+        gnu_tar_command     'gtar'
+        remove_files        '--remove-files '
+        prefix              'cxtracker'
+        max_scan_time_in_sec 31536000
+    end
 
 end
