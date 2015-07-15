@@ -1,3 +1,18 @@
+require "docopt"
+
+#require 'freezer_burn'
+
+
+module FreezerBurn
+
+    class CLI
+
+      def self.invoke
+        self.new
+      end
+
+      def initialize
+          
 doc = <<DOCOPT
 Example of program with many options using docopt.
 Usage:
@@ -29,12 +44,15 @@ Options:
   --doctest            run doctest on myself
 DOCOPT
 
-begin
-  require "pp"
-  pp Docopt::docopt(doc)
-rescue Docopt::Exit => e
-  puts e.message
-end
+            begin
+              require "pp"
+              pp Docopt::docopt(doc)
+            rescue Docopt::Exit => e
+              puts e.message
+            end
+        end
+    end # class
+end # module
 
 =begin
 begin
@@ -46,4 +64,4 @@ begin
   rescue Barnyard2::Waldo::WaldoFileError
       abort "Waldo File Error, file may not exist."
   end
-=end  
+=end
