@@ -17,7 +17,7 @@ Gem::Specification.new do |gem|
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
   gem.name          = "freezer_burn"
   gem.require_paths = ["lib"]
-  gem.version       = Easy::Bin::VERSION
+  gem.version       = FreezerBurn::VERSION
   gem.license       = 'MIT'
 
   #Gonna is a mechanize example bin that fetches are parses a fake page.
