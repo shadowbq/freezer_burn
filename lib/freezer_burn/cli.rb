@@ -50,7 +50,7 @@ DOCOPT
                 FreezerBurn::Settings.dryrun = true
             end
 
-            FreezerBurn::Rotation.rotate(FreezerBurn::Settings.fridge}
+            FreezerBurn::Rotation.rotate(FreezerBurn::Settings.fridge)
 
 
 
