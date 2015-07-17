@@ -3,7 +3,8 @@ begin
   require 'rubygems'
   require 'bundler'
   Bundler.setup(:default)
-rescue ::Exception => e
+rescue LoadError
+  raise 'Could not load the bundler gem. Install it with `gem install bundler`.'
 end
 
 # Executable with absolute path to lib for hacking and development
