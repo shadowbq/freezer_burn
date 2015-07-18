@@ -58,7 +58,7 @@ DOCOPT
         exit 0
       end
 
-      FreezerBurn::Rotation.rotate(FreezerBurn::Settings.fridge)
+      FreezerBurn::Rotation.rotate()
     end # def
   end # class
 end # module

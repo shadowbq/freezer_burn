@@ -8,6 +8,7 @@ Gemfile.lock
 /pkg/
 /spec/reports/
 /test/tmp/
+/test/data/freezer/
 /test/version_tmp/
 /tmp/
 

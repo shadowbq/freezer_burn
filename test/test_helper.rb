@@ -8,9 +8,14 @@ SimpleCov.start do
   add_group 'Lib', '/lib'
 end
 
+gem "minitest"
 require 'minitest/autorun'
-require 'minitest/colorize'
+require 'minitest/pride'
 require 'minitest/spec'
 
-require File.join(File.dirname(__FILE__), '..', 'lib', 'freezer_burn', 'cli')
+# :: Scaffold for CodeClimate
+# require "codeclimate-test-reporter"
+# CodeClimate::TestReporter.start
+
+#require File.join(File.dirname(__FILE__), '..', 'freezer_burn')
 require File.join(File.dirname(__FILE__), '..', 'lib', 'freezer_burn')

@@ -36,6 +36,19 @@ module FreezerBurn
     def self.list
       @@registered_settings
     end
+
+    def self.reset!
+      self.config do
+        verbose false
+        dryrun false
+        fridge '/var/db/yard/stats.*'
+        freezer '/var/log/freezer'
+        gnu_tar_command 'gtar'
+        remove_files '--remove-files '
+        prefix 'cxtracker'
+        max_scan_time_in_sec 31_536_000
+      end
+    end
   end
 
   # [1] pry(#<FreezerBurn::CLI>)> Settings.list
@@ -50,14 +63,5 @@ module FreezerBurn
     parameter :max_scan_time_in_sec
   end
 
-  Settings.config do
-    verbose false
-    dryrun false
-    fridge '/var/db/yard/stats.*'
-    freezer '/var/log/freezer'
-    gnu_tar_command 'gtar'
-    remove_files '--remove-files '
-    prefix 'cxtracker'
-    max_scan_time_in_sec 31_536_000
-  end
+  Settings.reset!
 end
