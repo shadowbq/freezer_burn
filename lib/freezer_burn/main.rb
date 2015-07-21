@@ -1,4 +1,5 @@
 module FreezerBurn
+  class FactoryError < StandardError; end
   class CustomError < StandardError; end
 
   module Settings

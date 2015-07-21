@@ -12,7 +12,8 @@ module FreezerBurn
       doc = <<DOCOPT
 Example of program with many options using docopt.
 Usage:
-  ./bin/freezer_selector [-vdk] [--version] [-f <fridge>] [-F <freezer>]
+  ./bin/freezer_selector passivedns [-vdk] [--version] [-f <fridge>] [-F <freezer>]
+  ./bin/freezer_selector cxtracker [-vdk] [--version] [-f <fridge>] [-F <freezer>]
   ./bin/freezer_selector -h | --help
 
 Options:
@@ -58,7 +59,12 @@ DOCOPT
         exit 0
       end
 
-      FreezerBurn::Rotation.rotate()
+      if options['cxtracker']
+        FreezerBurn::Cxtracker.rotate()
+      elsif options['passivedns']
+        FreezerBurn::Passivedns.rotate()
+      end
+
     end # def
   end # class
 end # module

@@ -23,6 +23,7 @@ module FreezerBurn
 
       @collection = _build_collection(fridge)
 
+      _parser_setting
       return self
     end
 
@@ -41,31 +42,19 @@ module FreezerBurn
     end
 
     #private
-
-    def _build_collection(dir)
-      @dirglob = Dir.glob(dir)
-      collection = []
-
-      @dirglob.each do |filename|
-        collection << { filename: filename, file_epoch: _get_file_epoch_cxtracker(filename) }
-      end
-
-      @dirglob = nil
-
-      # remove from collection elements with no file_epoch k/v
-      collection.collect { |e| e if e[:file_epoch] != '' }.compact
+    # Stub
+    def _parser_setting
+      raise FactoryError, "method not defined by Parent object"
     end
 
-    # ./test/data/stats.bge1.1429901797
-    # stats.bge1.1429901798
+    # Stub
+    def _build_collection(dir)
+      raise FactoryError, "method not defined by Parent object"
+    end
+
+    # Stub
     def _get_file_epoch_cxtracker(filename)
-      file_epoch = File.basename(filename).split('.')[2]
-      # should safely cast
-      file_epoch = Integer(file_epoch)
-      # ArgumentError: invalid value for Integer: "nights"
-      return file_epoch
-    rescue
-      return ''
+      raise FactoryError, "method not defined by Parent object"
     end
 
     def _rotate_interval
