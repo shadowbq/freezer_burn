@@ -11,4 +11,6 @@ module FreezerBurn
   require 'freezer_burn/main'
   require 'freezer_burn/version'
   require 'freezer_burn/rotation'
+  require 'freezer_burn/parsers/cxtracker'
+  require 'freezer_burn/parsers/passivedns'
 end

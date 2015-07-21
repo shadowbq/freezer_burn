@@ -13,12 +13,12 @@ describe "rotation" do
 
   describe 'when calling an rotation job' do
     it 'should return a roation job object' do
-      job = FreezerBurn::Rotation.new
-      job.must_be_instance_of FreezerBurn::Rotation
+      job = FreezerBurn::Cxtracker.new
+      job.must_be_instance_of FreezerBurn::Cxtracker
     end
 
     it 'should respond with a collection of files in fridge' do
-      job = FreezerBurn::Rotation.new
+      job = FreezerBurn::Cxtracker.new
       job.collection.must_be_instance_of Array
       job.collection.size.must_equal 3
     end
