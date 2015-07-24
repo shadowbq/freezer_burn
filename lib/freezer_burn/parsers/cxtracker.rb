@@ -1,7 +1,7 @@
 module FreezerBurn
   class Cxtracker < Rotation
 
-    def _parser_setting
+    def self.update_settings!
       FreezerBurn::Settings.prefix 'cxtracker'
       FreezerBurn::Settings.fridge '/var/db/yard/stats.*'
     end

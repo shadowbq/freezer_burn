@@ -1,9 +1,9 @@
 module FreezerBurn
   class Passivedns < Rotation
 
-    def _parser_setting
+    def self.update_settings!
       FreezerBurn::Settings.prefix 'passivedns'
-      FreezerBurn::Settings.fridge '/var/db/yard/stats.*'
+      FreezerBurn::Settings.fridge '/var/db/yard/pdns.*'
     end
 
     def _build_collection(dir)

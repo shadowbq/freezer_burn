@@ -1,12 +1,15 @@
 # freezer_burn
-Rough management of compressed log files
+Rough management of compressed log files.
 
-## Usage 
+## Usage
 ```shell
-Example of program with many options using docopt.
+$> freezer_burn -h
+Rough management of compressed log files.
+
 Usage:
-  ./bin/freezer_selector [-vdk] [--version] [-f <fridge>] [-F <freezer>]
-  ./bin/freezer_selector -h | --help
+  ./bin/freezer_burn passivedns [-vdk] [--version] [-f <fridge>] [-F <freezer>]
+  ./bin/freezer_burn cxtracker [-vdk] [--version] [-f <fridge>] [-F <freezer>]
+  ./bin/freezer_burn -h | --help
 
 Options:
   -f <fridge>          look for logs here
@@ -21,17 +24,17 @@ Options:
 ## Example Usage
 
 ```shell
-[shadowbq@...](~/sandbox/freezer_burn)$ ./bin/freezer_selector -dvk -F /man
+$> freezer_burn -dvk -F /man
 Searching 1436932800 -> 1437019200: 0 files
 
-[shadowbq@...](~/sandbox/freezer_burn)$ ./bin/freezer_selector -dvk -F /man --version
-version => 0.0.2
+$> freezer_burn passivedns -dv -F /man --version
+version => 0.0.4
 verbose => true
 dryrun => true
-fridge => /var/db/yard/stats.*
+fridge => /var/db/yard/pdns.*
 freezer => /man
 gnu_tar_command => gtar
-remove_files => 
-prefix => cxtracker
+remove_files => --remove-files
+prefix => passivedns
 max_scan_time_in_sec => 31536000
 ```

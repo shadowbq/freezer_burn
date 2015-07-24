@@ -1,7 +1,4 @@
 module FreezerBurn
-  class FactoryError < StandardError; end
-  class CustomError < StandardError; end
-
   module Settings
     extend self
 
@@ -50,6 +47,21 @@ module FreezerBurn
         max_scan_time_in_sec 31_536_000
       end
     end
+
+    def self.to_h
+      c = {}
+      FreezerBurn::Settings.list.each do |toggle|
+        c[toggle.to_sym] = FreezerBurn::Settings.send(toggle)
+      end
+      return c
+    end
+
+    def self.print
+      FreezerBurn::Settings.list.each do |toggle|
+        puts "#{toggle} => #{FreezerBurn::Settings.send(toggle)}"
+      end
+    end
+
   end
 
   # [1] pry(#<FreezerBurn::CLI>)> Settings.list

@@ -5,6 +5,11 @@ module FreezerBurn
 
     attr_reader :collection
 
+    # Stub
+    def self.update_settings!
+      raise ClassError, "method stub called, child method missing"
+    end
+
     def self.rotate(fridge=FreezerBurn::Settings.fridge)
       rotation = self.new(fridge)
       rotation.rotate
@@ -23,7 +28,7 @@ module FreezerBurn
 
       @collection = _build_collection(fridge)
 
-      _parser_setting
+      self.class.update_settings!
       return self
     end
 
@@ -42,19 +47,15 @@ module FreezerBurn
     end
 
     #private
-    # Stub
-    def _parser_setting
-      raise FactoryError, "method not defined by Parent object"
-    end
 
     # Stub
     def _build_collection(dir)
-      raise FactoryError, "method not defined by Parent object"
+      raise ClassError, "method stub called, child method missing"
     end
 
     # Stub
     def _get_file_epoch_cxtracker(filename)
-      raise FactoryError, "method not defined by Parent object"
+      raise ClassError, "method stub called, child method missing"
     end
 
     def _rotate_interval

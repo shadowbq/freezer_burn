@@ -9,12 +9,22 @@ module FreezerBurn
     end
 
     def initialize
+
+      @parsers = [:cxtracker, :passivedns]
+
       doc = <<DOCOPT
-Example of program with many options using docopt.
+Rough management of compressed log files.
+
 Usage:
-  ./bin/freezer_selector passivedns [-vdk] [--version] [-f <fridge>] [-F <freezer>]
-  ./bin/freezer_selector cxtracker [-vdk] [--version] [-f <fridge>] [-F <freezer>]
-  ./bin/freezer_selector -h | --help
+DOCOPT
+
+      @parsers.each do |parser|
+        doc += "freezer_burn #{parser} [-vdk] [--version] [-f <fridge>] [-F <freezer>] \n"
+      end
+
+doc_part2 = <<DOCOPT
+
+  freezer_burn -h | --help
 
 Options:
   -f <fridge>          look for logs here
@@ -27,44 +37,53 @@ Options:
 
 DOCOPT
 
-      options = {}
+      @options = {}
       begin
-        options = Docopt.docopt(doc)
+        @options = Docopt.docopt(doc+doc_part2)
         rescue Docopt::Exit => e
           puts e.message
           exit 1
       end
 
-      if options['--verbose']
-        FreezerBurn::Settings.verbose = true
-      else
-        FreezerBurn::Settings.verbose = false
-      end
+      # Boolean switch
+      FreezerBurn::Settings.verbose = @options['--verbose'] ? true : false
+      FreezerBurn::Settings.dryrun = @options['--dry-run'] ? true : false
 
-      FreezerBurn::Settings.dryrun = true if options['--dry-run']
+      # Maintain defaults
+      FreezerBurn::Settings.remove_files = '' if @options['--keep-files']
+      FreezerBurn::Settings.fridge = @options['-f'] if @options['-f']
+      FreezerBurn::Settings.freezer = @options['-F'] if @options['-F']
 
-      FreezerBurn::Settings.remove_files = '' if options['--keep-files']
-
-      FreezerBurn::Settings.fridge = options['-f'] if options['-f']
-
-      FreezerBurn::Settings.freezer = options['-F'] if options['-F']
-
-      if options['--version']
-        puts 'version => ' + FreezerBurn::VERSION.to_s
-        if FreezerBurn::Settings.verbose
-          FreezerBurn::Settings.list.each do |toggle|
-            puts "#{toggle} => #{FreezerBurn::Settings.send(toggle)}"
-          end
-        end
+      if @options['--version']
+        _version
         exit 0
       end
 
-      if options['cxtracker']
-        FreezerBurn::Cxtracker.rotate()
-      elsif options['passivedns']
-        FreezerBurn::Passivedns.rotate()
-      end
+      _meta_parser("rotate")
 
     end # def
+
+    private
+
+    def _version
+      puts 'version => ' + FreezerBurn::VERSION.to_s
+      if FreezerBurn::Settings.verbose
+        _meta_parser("update_settings!")
+        FreezerBurn::Settings.print
+      end
+    end
+
+    def _meta_parser(cmd)
+      @parsers.each do |el|
+        el = el.to_s
+        klass = "FreezerBurn::" + el.capitalize
+        if @options[el]
+          Object.const_get19(klass).send(cmd)
+          break # jump out of each
+        end
+      end
+    end
+
+
   end # class
 end # module
