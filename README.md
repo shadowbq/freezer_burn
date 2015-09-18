@@ -11,7 +11,7 @@ Rough management of compressed log files.
 ## Usage
 ```shell
 $> freezer_burn -h
-Rough management of compressed log files.
+Rough management for compressing and managing log files.
 
 Usage:
   ./bin/freezer_burn passivedns [-vdk] [--version] [-f <fridge>] [-F <freezer>]
