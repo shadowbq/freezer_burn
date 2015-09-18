@@ -8,6 +8,9 @@ SimpleCov.start do
   add_group 'Lib', '/lib'
 end
 
+require "codeclimate-test-reporter"
+CodeClimate::TestReporter.start
+
 gem "minitest"
 require 'minitest/autorun'
 require 'minitest/pride'

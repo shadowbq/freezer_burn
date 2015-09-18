@@ -29,4 +29,5 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency('ansi')
   gem.add_development_dependency('simplecov')
   gem.add_development_dependency('travis')
+  gem.add_development_dependency('codeclimate-test-reporter')
 end

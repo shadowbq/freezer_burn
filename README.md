@@ -1,6 +1,13 @@
 # freezer_burn
 Rough management of compressed log files.
 
+## Code Status
+
+[![Build Status](https://travis-ci.org/shadowbq/freezer_burn.svg?branch=master)](https://travis-ci.org/shadowbq/freezer_burn)
+[![Code Climate](https://codeclimate.com/github/shadowbq/freezer_burn/badges/gpa.svg)](https://codeclimate.com/github/shadowbq/freezer_burn)
+[![Test Coverage](https://codeclimate.com/github/shadowbq/freezer_burn/badges/coverage.svg)](https://codeclimate.com/github/shadowbq/freezer_burn)
+[![GitHub tag](https://img.shields.io/github/tag/shadowbq/freezer_burn.svg)](http://github.com/shadowbq/freezer_burn)
+
 ## Usage
 ```shell
 $> freezer_burn -h
