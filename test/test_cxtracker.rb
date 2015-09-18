@@ -1,4 +1,4 @@
-require 'pry'
+# require 'pry'
 # binding.pry
 require 'test_helper'
 require 'minitest/spec'
