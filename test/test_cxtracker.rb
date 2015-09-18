@@ -20,7 +20,7 @@ describe "rotation" do
     it 'should respond with a collection of files in fridge' do
       job = FreezerBurn::Cxtracker.new
       job.collection.must_be_instance_of Array
-      job.collection.must_equal [{:filename=>"./test/data/stats.bge1.1429901799", :file_epoch=>1429901799}, {:filename=>"./test/data/stats.bge1.1429901795", :file_epoch=>1429901795}, {:filename=>"./test/data/stats.bge1.1429901797", :file_epoch=>1429901797}]
+      job.collection.must_include({:filename => "./test/data/stats.bge1.1429901795", :file_epoch => 1429901795})
     end
 
   end
