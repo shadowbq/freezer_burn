@@ -17,17 +17,24 @@ module FreezerBurn
         # For each given symbol we generate accessor method that sets option's
         # value being called with an argument, or returns option's current value
         # when called without arguments
+        undef_method name if method_defined? name
+
         define_method name do |*values|
           value = values.first
-          value ? send("#{name}=", value) : instance_variable_get("@#{name}")
+          #binding.pry
+          if value
+            send("#{name}=", value)
+          else
+            instance_variable_defined?("@#{name}") ?  instance_variable_get("@#{name}") : nil
+          end
         end
       end
     end
 
     # And we define a wrapper for the configuration block, that we'll use to set up
     # our set of options
-    def config(&block)
-      instance_eval &block
+    def config &block
+      instance_eval(&block)
     end
 
     # list available settings
@@ -39,7 +46,7 @@ module FreezerBurn
       self.config do
         verbose false
         dryrun false
-        fridge '/var/db/yard/stats.*'
+        fridge '/var/db/fridge/*.log'
         freezer '/var/log/freezer'
         gnu_tar_command 'gtar'
         remove_files '--remove-files '

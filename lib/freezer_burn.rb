@@ -1,6 +1,5 @@
 # STDLIBS
 require 'rubygems'
-
 module FreezerBurn
   $LOAD_PATH.unshift(File.dirname(__FILE__))
 

@@ -3,7 +3,7 @@ module FreezerBurn
 
     def self.update_settings!
       FreezerBurn::Settings.prefix 'cxtracker'
-      FreezerBurn::Settings.fridge '/var/db/yard/stats.*'
+      FreezerBurn::Settings.fridge '/var/db/fridge/stats.*'
     end
 
     def _build_collection(dir)

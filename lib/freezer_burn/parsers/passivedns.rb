@@ -3,7 +3,7 @@ module FreezerBurn
 
     def self.update_settings!
       FreezerBurn::Settings.prefix 'passivedns'
-      FreezerBurn::Settings.fridge '/var/db/yard/pdns.*'
+      FreezerBurn::Settings.fridge '/var/db/fridge/pdns.*'
     end
 
     def _build_collection(dir)

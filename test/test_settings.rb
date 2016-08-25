@@ -10,7 +10,7 @@ describe FreezerBurn::Settings do
 
   describe 'when calling an APP Setting' do
     it 'should respond with defaults' do
-      FreezerBurn::Settings.fridge.must_equal '/var/db/yard/stats.*'
+      FreezerBurn::Settings.fridge.must_equal '/var/db/fridge/*.log'
     end
 
     it 'should list its attributes' do
@@ -18,7 +18,7 @@ describe FreezerBurn::Settings do
     end
 
     it 'should convert to a hash with new test settings' do
-      target_hash = {:verbose=>nil, :dryrun=>nil, :fridge=>"/var/db/yard/stats.*", :freezer=>"./test/data/freezer", :gnu_tar_command=>"gtar", :remove_files=>"--remove-files ", :prefix=>"cxtracker", :max_scan_time_in_sec=>31536000}
+      target_hash = {:verbose=>nil, :dryrun=>nil, :fridge=>"/var/db/fridge/*.log", :freezer=>"./test/data/freezer", :gnu_tar_command=>"gtar", :remove_files=>"--remove-files ", :prefix=>"cxtracker", :max_scan_time_in_sec=>31536000}
       FreezerBurn::Settings.to_h.must_equal target_hash
     end
 
