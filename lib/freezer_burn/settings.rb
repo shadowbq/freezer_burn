@@ -21,7 +21,6 @@ module FreezerBurn
 
         define_method name do |*values|
           value = values.first
-          #binding.pry
           if value
             send("#{name}=", value)
           else
